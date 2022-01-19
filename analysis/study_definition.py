@@ -8,6 +8,16 @@ study = StudyDefinition(
         "incidence": 0.5,
     },
     population=patients.registered_with_one_practice_between(
-        "2019-02-01", "2020-02-01"
+        "2019-02-01", "2020-02-01"  # "I'm interested in all patients who have 
+                                    # never changed practice, between these two dates"
+    ),
+    age=patients.age_as_of(
+        "2019-09-01",   # "Give me a column of data corresponding to the age of 
+                        # each patient on the given date"
+        return_expectations={
+            "rate": "universal",
+            "int": {"distribution": "population_ages"},     # "I expect every patient to have a value, 
+                                                            # and the distribution of ages to match that of the real UK population"
+        },
     ),
 )
